@@ -99,26 +99,26 @@ const SidebarLeft = ({ onSearchTermChange }) => {
 
             <div className="nav__list">
               <div className="nav__items">
-                <h3 className="nav__subtitle">Main</h3>
+                <h3 className="nav__subtitle">Principal</h3>
                 
                 <Link to="/dashboard" className={`nav__link ${isActive('/dashboard') ? 'active' : ''}`}>
                   <FaHome className="nav__icon" />
-                  <span className="nav__name">Home</span>
+                  <span className="nav__name">Inicio</span>
                 </Link>
                 
                 <Link to="/dashboard/orders" className={`nav__link ${isActive('/dashboard/orders') ? 'active' : ''}`}>
                   <FaShopify className="nav__icon" />
-                  <span className="nav__name">Orders</span>
+                  <span className="nav__name">Pedidos</span>
                 </Link>
                 
                 <Link to="/dashboard/form" className={`nav__link ${isActive('/dashboard/form') ? 'active' : ''}`}>
                   <FaWpforms className="nav__icon" />
-                  <span className="nav__name">Form</span>
+                  <span className="nav__name">Productos/Categorias</span>
                 </Link>
                 
                 <Link to="/cart" className={`nav__link ${isActive('/cart') ? 'active' : ''}`}>
                   <FaShoppingCart className="nav__icon" />
-                  <span className="nav__name">Cart</span>
+                  <span className="nav__name">Carrito de Compras</span>
                 </Link>
                 
                 {user?.isAdmin && (
@@ -127,17 +127,17 @@ const SidebarLeft = ({ onSearchTermChange }) => {
                     
                     <Link to="/dashboard/products-table" className={`nav__link ${isActive('/dashboard/products-table') ? 'active' : ''}`}>
                       <FaBox className="nav__icon" />
-                      <span className="nav__name">Products</span>
+                      <span className="nav__name">Productos</span>
                     </Link>
                     
                     <Link to="/dashboard/categories-table" className={`nav__link ${isActive('/dashboard/categories-table') ? 'active' : ''}`}>
                       <FaTags className="nav__icon" />
-                      <span className="nav__name">Categories</span>
+                      <span className="nav__name">Categorias</span>
                     </Link>
                     
                     <Link to="/dashboard/users-table" className={`nav__link ${isActive('/dashboard/users-table') ? 'active' : ''}`}>
                       <FaUsers className="nav__icon" />
-                      <span className="nav__name">Users</span>
+                      <span className="nav__name">Usuarios</span>
                     </Link>
                   </>
                 )}
@@ -159,7 +159,7 @@ const SidebarLeft = ({ onSearchTermChange }) => {
             
             <a href="#" className="nav__link nav__logout" onClick={(e) => { e.preventDefault(); logoutUser(); }}>
               <FaSignInAlt className="nav__icon" />
-              <span className="nav__name">Log Out</span>
+              <span className="nav__name">Cerrar Sesión</span>
             </a>
           </div>
         </div>

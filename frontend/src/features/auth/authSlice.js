@@ -107,7 +107,7 @@ export const authSlice = createSlice({
             state.loading = false
             state.user = action.payload
             addLocalStorageUser(action.payload)
-            toast.success('user success login')
+            toast.success('Inicio de Sesión Exitoso')
         })
         .addCase(login.rejected, (state, action) => {
             state.loading = false
@@ -118,7 +118,7 @@ export const authSlice = createSlice({
         .addCase(logout.fulfilled, (state) => {
             state.user = null
             deleteLocalStorageUser()
-            toast.success('User logout')
+            toast.success('Cerrando Sesion de Userio')
         })
         .addCase(allUsers.fulfilled, (state, action) => {
             state.users = action.payload
@@ -133,7 +133,7 @@ export const authSlice = createSlice({
                 user._id === action.payload._id ? action.payload : user
             )
             state.users = updatedUsers
-            toast.success('user successfully updated')
+            toast.success('Usuario actualizado correctamente')
         })
         .addCase(updateUser.rejected, (state, action) => {
             state.loading = false
@@ -147,7 +147,7 @@ export const authSlice = createSlice({
             // update users state
             let removeUser = state.users.filter(item => item._id !== action.payload._id)
             state.users = removeUser
-            toast.success('user successfully deleted')
+            toast.success('Usuario eliminado correctamente')
         })
         .addCase(removeUser.rejected, (state, action) => {
             state.loading = false
