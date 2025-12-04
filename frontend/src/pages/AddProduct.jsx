@@ -186,7 +186,7 @@ const AddProduct = ({ closeModal }) => {
         <div className="form-input">
           {isEditing ? (
             <button className="product-btn" disabled={loading}>
-              {loading ? "Actualizando..." : "Editar Producto"}
+              {loading ? "Actualizando..." : "Actualizar Producto"}
             </button>
           ) : (
             <button className="product-btn">Agregar Producto</button>

@@ -1233,7 +1233,7 @@ h1 {
 
 .products-title .products {
   color: rgb(80, 80, 87);
-  font-size: 25px;
+  font-size: 30px;
   font-family: var(--font-family1);
 }
 
@@ -1246,7 +1246,7 @@ h1 {
   margin-top: 50px;
   margin-right: 40px;
   width: 250px;
-  height: 300px;
+  height: 330px;
   /*padding: 50px;*/
   border-radius: 40px;
   position: relative;
@@ -1281,20 +1281,20 @@ h1 {
 
 .product-content .product-cart .default-image {
   width: 250px;
-  height: 120px;
+  height: 125px;
   padding: 5px;
   position: absolute;
   background-color: rgb(231, 191, 116);
-  top: 0px;
+  top: 1px;
   object-fit: contain;
   border-radius: 30px 30px 0px 0px;   
 }
 
 .product-content .product-cart .product-image {
     width: 60%;
-    height: 120px;
+    height: 125px;
     position: absolute;
-    top: 10px;
+    top: 5px;
     object-fit: cover;
     border-radius: 30px 30px 30px 30px;
 }
@@ -1328,7 +1328,7 @@ h1 {
   border-radius: 15px;
   background-color: rgb(236, 156, 6);
   color: white;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 500;
 }
 
@@ -1343,9 +1343,10 @@ h1 {
 
 .product-content .product-cart .product-cart-detail h4 {
   color: black;
-  font-size: 20px;
+  font-size: 16px;
   font-family: var(--font-family3);
-  margin-top: 45px;  
+  margin-top: 55px;  
+  text-align: center;
 }
 
 .product-content .product-cart .product-cart-detail .product-price {
@@ -1353,7 +1354,7 @@ h1 {
   font-size: 25px;
   font-family: var(--font-family2);
   font-weight: 600;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 .product-content .product-cart .product-cart-detail .stock-status {
