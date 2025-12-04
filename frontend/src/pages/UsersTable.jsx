@@ -88,7 +88,7 @@ const UsersTable = () => {
       </table>
       {showAddModal && (
         <div className="modal-overlay" style={{ 
-          position: 'fixed', 
+          position: 'sticky', 
           top: 0, 
           left: 0, 
           width: '100%', 
@@ -110,16 +110,16 @@ const UsersTable = () => {
       )}
       {showEditModal && selectedUser && (
         <div className="modal-overlay" style={{ 
-          position: 'fixed', 
-          top: 0, 
+          position: 'static', 
+          top: 50, 
           left: 0, 
           width: '100%', 
           height: '100%', 
           backgroundColor: 'rgba(0,0,0,0.5)', 
-          display: 'flex', 
+          // display: 'flex', 
           justifyContent: 'center', 
           alignItems: 'center', 
-          zIndex: 1000 
+          // zIndex: 1000 
         }}>
           <div className="modal-content" style={{ 
             maxHeight: '90vh', 

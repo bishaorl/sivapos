@@ -52,7 +52,7 @@ const Orders = () => {
           {orders.map((order) => (
             <tr key={order.id}>
               <td style={{ width: '15%' }}>{order.id}</td>
-              <td style={{ width: '15%' }}>{order.userId || "N/A"}</td>
+              <td style={{ width: '15%' }}>{order.customer || "N/A"}</td>
               <td style={{ width: '25%' }}>
                 {order.cartItems?.map((item, index) => (
                   <div key={index}>
