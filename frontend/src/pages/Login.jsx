@@ -45,10 +45,10 @@ const Login = () => {
     <>
       <div className="auth-container">
         <form className="register-form" onSubmit={handleSubmit}>
-          <h1>Login</h1>
+          <h1>Inicio de Sesion</h1>
 
           <div className="formInput">
-            <label>Email</label>
+            <label>Correo</label>
             <input
               type="email"
               placeholder="Email"
@@ -59,7 +59,7 @@ const Login = () => {
           </div>
 
           <div className="formInput">
-            <label>Password</label>
+            <label>Contraseña</label>
             <input
               type="password"
               placeholder="Password"
@@ -70,11 +70,11 @@ const Login = () => {
           </div>
 
           <button type="submit" className="btn-grad">
-            Log In
+            Iniciar Sesion
           </button>
 
           <div className="home">
-            <a href="/">Go to home page</a>
+            <a href="/">Regresar a Pagina de Inicio</a>
           </div>
         </form>
       </div>

@@ -19,7 +19,7 @@ const Home = () => {
         </h1>
         <ul>
           <li>
-            <Link to="/login">Login</Link>
+            <Link to="/login">Iniciar Sesion</Link>
           </li>
           <li>
             <Link to="/register">Registrarse</Link>
