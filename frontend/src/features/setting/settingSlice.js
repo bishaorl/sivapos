@@ -55,7 +55,6 @@ export const settingSlice = createSlice({
                 state.isLoading = false
                 state.isError = true
                 state.message = action.payload
-                toast.error(action.payload)
             })
             .addCase(saveSetting.pending, (state) => {
                 state.isLoading = true

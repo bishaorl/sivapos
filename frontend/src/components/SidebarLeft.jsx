@@ -1,20 +1,18 @@
 import React, { useState } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
-import {
-  FaHome,
-  FaShoppingCart,
-  FaShopify,
-  FaUserCircle,
+import { 
   FaSignInAlt,
-  FaWpforms,
   FaBox,
   FaTags,
-  FaUsers,
-  FaSearch,
-  FaBars,
   FaUser,
-  FaCog
+  FaSearch
 } from "react-icons/fa";
+import { FcTimeline } from "react-icons/fc";
+import { FcHome } from "react-icons/fc";
+import { FcServices } from "react-icons/fc";
+import { FcPortraitMode } from "react-icons/fc";
+import { FcMoneyTransfer } from "react-icons/fc";
+import { FcCurrencyExchange } from "react-icons/fc";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../features/auth/authSlice";
 
@@ -102,24 +100,24 @@ const SidebarLeft = ({ onSearchTermChange }) => {
               <div className="nav__items">
                 <h3 className="nav__subtitle">Principal</h3>
                 
-                <Link to="/dashboard" className={`nav__link ${isActive('/dashboard') ? 'active' : ''}`}>
-                  <FaHome className="nav__icon" />
+                <Link to="/dashboard" className={`nav__link ${isActive('/dashboard') ? 'active' : ''}`}>                                    
+                  <FcHome size={24} color="#007bff" className="nav__icon" />
                   <span className="nav__name">Inicio</span>
                 </Link>
                 
                 <Link to="/dashboard/orders" className={`nav__link ${isActive('/dashboard/orders') ? 'active' : ''}`}>
-                  <FaShopify className="nav__icon" />
+                  <FcMoneyTransfer size={24} className="nav__icon" />
                   <span className="nav__name">Pedidos</span>
                 </Link>
                 
-                <Link to="/dashboard/form" className={`nav__link ${isActive('/dashboard/form') ? 'active' : ''}`}>
-                  <FaWpforms className="nav__icon" />
+                <Link to="/dashboard/form" className={`nav__link ${isActive('/dashboard/form') ? 'active' : ''}`}>                  
+                  <FcTimeline size={24} color="red" className="nav__icon" />
                   <span className="nav__name">Productos/Categorias</span>
                 </Link>
                 
-                <Link to="/cart" className={`nav__link ${isActive('/cart') ? 'active' : ''}`}>
-                  <FaShoppingCart className="nav__icon" />
-                  <span className="nav__name">Carrito de Compras</span>
+                <Link to="/cart" className={`nav__link ${isActive('/cart') ? 'active' : ''}`}>                  
+                  <FcCurrencyExchange size={30} className="nav__icon" />
+                  <span className="nav__name">Facturar Compras</span>
                 </Link>
                 
                 {user?.isAdmin && (
@@ -127,22 +125,22 @@ const SidebarLeft = ({ onSearchTermChange }) => {
                     <h3 className="nav__subtitle">Admin</h3>
                     
                     <Link to="/dashboard/products-table" className={`nav__link ${isActive('/dashboard/products-table') ? 'active' : ''}`}>
-                      <FaBox className="nav__icon" />
+                      <FaBox size={24} color="red" className="nav__icon" />
                       <span className="nav__name">Productos</span>
                     </Link>
                     
                     <Link to="/dashboard/categories-table" className={`nav__link ${isActive('/dashboard/categories-table') ? 'active' : ''}`}>
-                      <FaTags className="nav__icon" />
+                      <FaTags size={24} color="cyan" className="nav__icon" />
                       <span className="nav__name">Categorias</span>
                     </Link>
                     
                     <Link to="/dashboard/users-table" className={`nav__link ${isActive('/dashboard/users-table') ? 'active' : ''}`}>
-                      <FaUsers className="nav__icon" />
+                      <FcPortraitMode size={24} className="nav__icon" />
                       <span className="nav__name">Usuarios</span>
                     </Link>
                     
                     <Link to="/dashboard/configuration" className={`nav__link ${isActive('/dashboard/configuration') ? 'active' : ''}`}>
-                      <FaCog className="nav__icon" />
+                      <FcServices color="24" className="nav__icon" />
                       <span className="nav__name">Configuración</span>
                     </Link>
                   </>
@@ -163,8 +161,8 @@ const SidebarLeft = ({ onSearchTermChange }) => {
               </div>
             </div>
             
-            <a href="#" className="nav__link nav__logout" onClick={(e) => { e.preventDefault(); logoutUser(); }}>
-              <FaSignInAlt className="nav__icon" />
+            <a href="/" className="nav__link nav__logout" onClick={(e) => { e.preventDefault(); logoutUser(); }}>
+              <FaSignInAlt size={30} color="red" className="nav__icon" />
               <span className="nav__name">Cerrar Sesión</span>
             </a>
           </div>

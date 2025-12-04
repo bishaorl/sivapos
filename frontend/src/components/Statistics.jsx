@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { getOrders } from "../features/order/orderSlice";
 import { allUsers } from "../features/auth/authSlice";
+import { getSetting } from "../features/setting/settingSlice";
 
 const Statistics = () => {
   const dispatch = useDispatch();
@@ -10,14 +11,42 @@ const Statistics = () => {
   const { products } = useSelector((state) => state.product);
   const { orders } = useSelector((state) => state.order);
   const { users, user } = useSelector((state) => state.auth);
+  const { setting } = useSelector((state) => state.setting);
 
   useEffect(() => {
     dispatch(getOrders());
     dispatch(allUsers());
+    dispatch(getSetting());
   }, [dispatch]);
-
+  
   return (
     <>
+    
+    {/* Contenedor de información de configuración */}
+    {setting && (
+      <div className="setting-info-container">
+        <div className="setting-info-content">
+          {setting.logo && (
+            <div className="setting-logo">
+              <img src={setting.logo} alt="Logo de la empresa" />
+            </div>
+          )}
+          <div className="setting-details">
+            <h3 className="setting-name">{setting.name}</h3>
+            <div className="setting-item">
+              <strong>RIF:</strong> {setting.rif}
+            </div>
+            <div className="setting-item">
+              <strong>Teléfono:</strong> {setting.telefono}
+            </div>
+            <div className="setting-item">
+              <strong>Correo:</strong> {setting.email}
+            </div>
+          </div>
+        </div>
+      </div>
+    )}
+
       <div className="statistic-layout">
         <Link to="/dashboard/orders-table" className="statistics-link">
           <div className="statistics">
@@ -69,6 +98,7 @@ const Statistics = () => {
           </div>
         </Link>
       </div>
+      
     </>
   );
 };

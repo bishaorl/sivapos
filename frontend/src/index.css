@@ -1098,22 +1098,24 @@ h1 {
 }
 
 /***************MAIN CONTENT******************/
-.statistic-layout {
-  display: flex;
+.statistic-layout {  
+  display: flex;  
   flex-wrap: wrap;
   gap: 90px;
 }
 
 .main-content .statistics {
-  width: 100%;
+  width: 200px;
+  height: 100px;
+  /* width: 100%; */
   background-color: white;
   border-radius: 30px;
   padding: 20px 45px;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-right: 40px;  
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* justify-content: center; */
+  /* margin-right: 40px;   */
 }
 
 .main-content .statistics .statistic-title {
@@ -2732,4 +2734,85 @@ margin: 5% auto;
 
 .close-icon {
   pointer-events: none;
+}
+
+/* Setting Info Container Styles */
+
+
+
+.setting-info-container {  
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  margin-top:-40px;
+  margin-bottom: 25px;  
+  display: flex;
+  width: fit-content;
+  max-width: 100%;  
+  padding: 1rem;
+  
+  /* position: fixed; */
+  /* top: 10px; */
+  /* right: 10px; */
+  /* width: 200px; */
+  /* height: 100px; */
+  /* background-color: #f0f0f0; */
+
+  
+}
+
+.setting-info-content {  
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.setting-logo img {
+  max-width: 100px;
+  max-height: 100px;
+  object-fit: contain;
+  border: 1px solid #e1e5eb;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.setting-details {
+  flex: 1 1 300px; /* Responsive width */
+  /* flex: 1; */
+}
+
+.setting-name {
+  color: var(--title-color);
+  font-size: var(--h2-font-size);
+  margin-bottom: 15px;
+  margin-top: 0;
+}
+
+.setting-item {
+  flex: 1 1 300px; /* Responsive width */
+  margin-bottom: 10px;
+  font-size: var(--normal-font-size);
+  color: var(--text-color);
+}
+
+.setting-item strong {
+  color: var(--title-color);
+  margin-right: 5px;
+}
+
+@media (max-width: 768px) {
+  .setting-info-content {    
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .setting-logo img {
+    max-width: 80px;
+    max-height: 80px;
+  }
+  
+  .setting-name {
+    font-size: var(--h3-font-size);
+  }
 }
