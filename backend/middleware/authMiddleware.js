@@ -26,4 +26,35 @@ const verifyToken = async (req, res, next) => {
     }
 }
 
-module.exports = { verifyToken }
+// Protect middleware
+const protect = async (req, res, next) => {
+    const token = req.cookies.accessToken
+    
+    if (token) {
+        try {
+            const { id } = verifyJWT(token)
+            req.user = await User.findByPk(id, { attributes: { exclude: ['password'] } })
+            
+            if (!req.user) {
+                return res.status(401).json({ message: 'Not authorized, user not found' })
+            }
+            
+            next()
+        } catch (error) {
+            return res.status(401).json({ message: 'Not authorized, token failed' })
+        }
+    } else {
+        return res.status(401).json({ message: 'Not authorized, no token' })
+    }
+}
+
+// Admin middleware
+const admin = (req, res, next) => {
+    if (req.user && req.user.isAdmin) {
+        next()
+    } else {
+        return res.status(401).json({ message: 'Not authorized as an admin' })
+    }
+}
+
+module.exports = { verifyToken, protect, admin }

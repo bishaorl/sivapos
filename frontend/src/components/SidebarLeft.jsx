@@ -12,7 +12,8 @@ import {
   FaUsers,
   FaSearch,
   FaBars,
-  FaUser
+  FaUser,
+  FaCog
 } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../features/auth/authSlice";
@@ -138,6 +139,11 @@ const SidebarLeft = ({ onSearchTermChange }) => {
                     <Link to="/dashboard/users-table" className={`nav__link ${isActive('/dashboard/users-table') ? 'active' : ''}`}>
                       <FaUsers className="nav__icon" />
                       <span className="nav__name">Usuarios</span>
+                    </Link>
+                    
+                    <Link to="/dashboard/configuration" className={`nav__link ${isActive('/dashboard/configuration') ? 'active' : ''}`}>
+                      <FaCog className="nav__icon" />
+                      <span className="nav__name">Configuración</span>
                     </Link>
                   </>
                 )}

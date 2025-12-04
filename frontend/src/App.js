@@ -16,6 +16,7 @@ import PrivateRoute from './pages/PrivateRoute'
 import UsersTable from './pages/UsersTable'
 import ProductsTable from './pages/ProductsTable'
 import CategoriesTable from './pages/CategoriesTable'
+import Configuration from './pages/Configuration'
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
               <Route path='users-table' element={<UsersTable />} />
               <Route path='products-table' element={<ProductsTable />} />
               <Route path='categories-table' element={<CategoriesTable />} />
+              <Route path='configuration' element={<Configuration />} />
               <Route path='form' element={<Modal />} />
               <Route path='category/:category' element={<CategoryProducts />} />
              

@@ -7,6 +7,7 @@ const authRoutes = require('./routes/authRoutes')
 const categoryRoutes = require('./routes/categoryRoutes')
 const productRoutes = require('./routes/productRoutes')
 const orderRoutes = require('./routes/orderRoutes')
+const settingRoutes = require('./routes/settingRoutes')
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
 
@@ -37,6 +38,7 @@ app.use('/api/auth', authRoutes)
 app.use('/api/category', categoryRoutes)
 app.use('/api/product', productRoutes)
 app.use('/api/order', orderRoutes)
+app.use('/api/setting', settingRoutes)
 
 // Middleware
 app.use(errorHandler)
