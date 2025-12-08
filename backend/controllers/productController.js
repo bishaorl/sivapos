@@ -11,7 +11,7 @@ const getAllProducts = async (req, res) => {
 // @desc    Add Product
 const addProduct = async (req, res) => {
 
-    const { name, stock, image, price, category } = req.body
+    const { name, stock, image, price, category, barcode } = req.body
     
     if (!name || !stock || !price || !category ) {
         res.status(400)
@@ -24,6 +24,7 @@ const addProduct = async (req, res) => {
         image,
         price,
         category,
+        barcode,
         userId: req.user.id
     })
 
@@ -35,7 +36,7 @@ const addProduct = async (req, res) => {
 const updateProduct = async (req, res) => {
     console.log('req.body:', req.body)
     console.log('req.params:', req.params)
-    const { name, stock, image, price, category } = req.body
+    const { name, stock, image, price, category, barcode } = req.body
     const { id } = req.params
     console.log('id:', id)
 
@@ -58,7 +59,8 @@ const updateProduct = async (req, res) => {
         stock,
         image,
         price,
-        category
+        category,
+        barcode
     })
     
     console.log('updated product:', updatedProduct)
@@ -72,6 +74,26 @@ const categoryProductFilter = async (req, res) => {
     const { category } = req.params
     const filterProduct = await Product.findAll({ where: { category } })
     res.status(201).json(filterProduct)
+}
+
+// @route   /api/product/search-by-barcode/:barcode
+// @desc    Search Product by Barcode
+const searchByBarcode = async (req, res) => {
+    const { barcode } = req.params
+    
+    if (!barcode) {
+        res.status(400)
+        throw new Error('Código de barras es requerido')
+    }
+
+    const product = await Product.findOne({ where: { barcode } })
+    
+    if (!product) {
+        res.status(404)
+        throw new Error('Producto no encontrado')
+    }
+
+    res.status(200).json(product)
 }
 
 const removeProduct = async (req, res) => {
@@ -99,5 +121,6 @@ module.exports = {
     getAllProducts,
     updateProduct,
     categoryProductFilter,
+    searchByBarcode,
     removeProduct
 }

@@ -32,6 +32,12 @@ const categoryProductFilter = async (category) => {
     return response.data
 }
 
+// Search product by barcode
+const searchProductByBarcode = async (barcode) => {
+    const response = await httpRequest.get(API_URL + '/search-by-barcode/' + barcode)
+    return response.data
+}
+
 // Update product
 const updateProduct = async (productId, productData) => {
     const response = await httpRequest.put(API_URL + '/update-product/' + productId, productData)
@@ -44,6 +50,7 @@ const productService = {
     removeProduct,
     editProduct,
     categoryProductFilter,
+    searchProductByBarcode,
     updateProduct,
 }
 

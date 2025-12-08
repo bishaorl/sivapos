@@ -28,6 +28,10 @@ const Product = sequelize.define('Product', {
         type: DataTypes.STRING,
         allowNull: false
     },
+    barcode: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
     userId: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -37,7 +41,18 @@ const Product = sequelize.define('Product', {
         }
     }
 }, {
-    timestamps: true
+    timestamps: true,
+    // Forzar la actualización del esquema si es necesario
+    sync: { alter: true }
 })
+
+// Sincronizar el modelo con la base de datos
+Product.sync({ alter: true })
+    .then(() => {
+        console.log('Tabla Products sincronizada correctamente');
+    })
+    .catch((error) => {
+        console.error('Error sincronizando tabla Products:', error);
+    });
 
 module.exports = Product

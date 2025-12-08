@@ -24,6 +24,7 @@ const ProductSchema = new mongoose.Schema({
     image: String,
     stock: Number,
     category: String,
+    barcode: String,
     userId: String
 }, { timestamps: true });
 
@@ -95,11 +96,13 @@ async function migrate() {
         const products = await MongoProduct.find({});
         for (const product of products) {
             await Product.create({
+                id: product._id.toString(),
                 name: product.name,
                 price: product.price,
                 image: product.image,
                 stock: product.stock,
                 category: product.category,
+                barcode: product.barcode || null,
                 userId: product.userId,
                 createdAt: product.createdAt,
                 updatedAt: product.updatedAt
@@ -111,6 +114,7 @@ async function migrate() {
         const orders = await MongoOrder.find({});
         for (const order of orders) {
             await Order.create({
+                id: order._id.toString(),
                 customer: order.customer,
                 country: order.country,
                 province: order.province,
@@ -126,14 +130,13 @@ async function migrate() {
                 updatedAt: order.updatedAt
             });
         }
-        console.log(`Migrados ${orders.length} pedidos`);
+        console.log(`Migradas ${orders.length} órdenes`);
 
-        console.log('Migración completada exitosamente');
+        console.log('¡Migración completada!');
+        process.exit(0);
     } catch (error) {
         console.error('Error durante la migración:', error);
-    } finally {
-        await mongoose.disconnect();
-        process.exit(0);
+        process.exit(1);
     }
 }
 

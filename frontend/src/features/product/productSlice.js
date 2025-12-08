@@ -10,6 +10,7 @@ const initialState = {
     image: '',
     price: '',
     category: '',
+    barcode: '',
     error: false,
     loading: false,
     isEditing: false,
@@ -49,6 +50,14 @@ export const categoryProductFilter = createAsyncThunk('product/categoryProductFi
     }
 })
 
+export const searchProductByBarcode = createAsyncThunk('product/searchProductByBarcode', async (barcode, thunkAPI) => {
+    try {
+       return await productService.searchProductByBarcode(barcode)
+    } catch (error) {
+         return thunkAPI.rejectWithValue(error.response.data)
+    }
+})
+
 export const updateProduct = createAsyncThunk('product/updateProduct', async ({ productId, productData }, thunkAPI) => {
     try {
         return await productService.updateProduct(productId, productData)
@@ -73,12 +82,17 @@ export const productSlice = createSlice({
         state[name] = value
         },
         setEditProduct: (state, action) => {
-            return {...state, isEditing :true, editProductId: action.payload.id, ...action.payload}
-        },
-        clearValues: () => {
-            return {
+            // Usar Object.assign para evitar problemas de Immer
+            Object.assign(state, {
                 ...initialState,
-            }
+                isEditing: true,
+                editProductId: action.payload.id,
+                ...action.payload
+            });
+        },
+        clearValues: (state) => {
+            // Resetear al estado inicial usando Object.assign
+            Object.assign(state, { ...initialState });
         },
         addProduct: (state, action) => {
             state.products.push(action.payload);
@@ -138,6 +152,30 @@ export const productSlice = createSlice({
             state.loading = false
             state.error = true
         }) 
+        .addCase(searchProductByBarcode.pending, (state) => {
+            state.loading = true
+        })
+        .addCase(searchProductByBarcode.fulfilled, (state, action) => {
+            state.loading = false
+            // Usar Object.assign para evitar problemas de Immer
+            Object.assign(state, {
+                ...state,
+                isEditing: true,
+                editProductId: action.payload.id,
+                name: action.payload.name,
+                stock: action.payload.stock,
+                image: action.payload.image,
+                price: action.payload.price,
+                category: action.payload.category,
+                barcode: action.payload.barcode || ''
+            });
+        })
+        .addCase(searchProductByBarcode.rejected, (state, action) => {
+            state.loading = false
+            state.error = true
+            const errorMessage = action.payload?.message || 'Producto no encontrado';
+            toast.error(errorMessage);
+        })
         .addCase(removeProduct.pending, (state) => {
             state.loading = true
         })
@@ -157,4 +195,3 @@ export const productSlice = createSlice({
 
 export const { handleChange, setEditProduct, clearValues, addProduct } = productSlice.actions;
 export default productSlice.reducer
-
