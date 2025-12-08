@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts, removeProduct, setEditProduct, clearValues, searchProductByBarcode } from "../features/product/productSlice";
-import { FaEdit, FaTrash, FaSearch } from "react-icons/fa";
+import { FaEdit, FaTrash, FaSearch, FaTimes } from "react-icons/fa";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import AddProduct from "./AddProduct";
 
@@ -95,6 +95,7 @@ const BarcodeGenerator = ({ value, width = 2, height = 60 }) => {
 const ProductsTable = () => {
   const dispatch = useDispatch();
   const { products, loading } = useSelector((state) => state.product);
+  const { isEditing } = useSelector((state) => state.product);
   const { user } = useSelector((state) => state.auth);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showPrintModal, setShowPrintModal] = useState(false);
@@ -152,12 +153,6 @@ const ProductsTable = () => {
     setShowEditModal(false);
     // Recargar productos para asegurar que la lista esté actualizada
     dispatch(getProducts());
-  };
-
-  // Función de prueba para verificar que el evento onClick funciona
-  const testButton = (product) => {
-    console.log('Botón de prueba clickeado para el producto:', product);
-    alert(`Botón de prueba clickeado para el producto: ${product.name} (${product.barcode})`);
   };
 
   // Función para mostrar la etiqueta de impresión en un modal
@@ -371,9 +366,61 @@ const ProductsTable = () => {
         </div>
       )}
       
+      {/* Modal de edición de productos */}
       {showEditModal && (
-        <div className="modal-overlay">
-          <div className="modal-content">
+        <div className="modal-overlay" style={{ 
+          position: "fixed",
+          // top: 20,
+          // bottom: 20,
+          left: 0,
+          width: '100%',
+          height: '110%',
+          backgroundColor: 'rgba(0,0,0,0.5)',
+          display: 'flex',
+          // display: 'inline-block',
+          justifyContent: 'center',
+          alignItems: 'center',
+          zIndex: 1000,
+          overflow: 'auto'
+        }}>
+          <div className="modal-content" style={{ 
+            maxHeight: '200vh',
+            overflowY: 'auto',
+            margin: '10px',            
+            width: '80%',
+            height: '110%',
+            maxWidth: '600px',            
+          }}>
+            <div style={{ 
+              position: 'sticky',
+              top: 0,
+              backgroundColor: 'white',
+              zIndex: 10,
+              padding: '15px 0',
+              borderBottom: '1px solid #eee',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center'
+            }}>              
+              {/* <h2 style={{ margin: '0 15px', color: '#333', fontSize: '1.5rem' }}>
+                {isEditing ? "Editar Producto" : "Agregar Nuevo Producto"}
+              </h2> */}
+              {/* <button 
+                type="button" 
+                className="btn-edit-3d"
+                onClick={closeForm}
+                style={{
+                  padding: '10px 20px',
+                  margin: '0 15px',
+                  fontSize: '16px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px'
+                }}
+              >
+                <FaTimes /> Cerrar
+              </button> */}
+            </div>
             <AddProduct closeModal={closeForm} />
           </div>
         </div>

@@ -10,6 +10,7 @@ import {
   searchProductByBarcode,
 } from "../features/product/productSlice";
 import { toast } from "react-toastify";
+import { FaTimes } from "react-icons/fa";
 
 // Componente para mostrar código de barras como SVG
 const BarcodeSVG = ({ value, width = 2, height = 60 }) => {
@@ -344,13 +345,30 @@ const AddProduct = ({ closeModal }) => {
   return (
     <div className="form-container">
       <form className="form" onSubmit={handleSubmit}>
-        <button type="button" className="exit" onClick={() => { dispatch(clearValues()); if (closeModal) closeModal(); }}>
-          X
-        </button>
-        <div className="add-form">
+        <div className="add-form" style={{ 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: 'center',
+          marginBottom: '20px'
+        }}>
           <h1 className="new-product">
             {isEditing ? "Editar Producto" : "Nuevo Producto"}
           </h1>
+          <button 
+            type="button" 
+            className="btn-edit-3d"
+            onClick={closeModal}
+            style={{
+              padding: '10px 20px',
+              margin: '0 15px',
+              fontSize: '16px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px'
+            }}
+          >
+            <FaTimes /> Cerrar
+          </button>
         </div>
 
         <div className="form-input barcode-input-container">
@@ -359,7 +377,7 @@ const AddProduct = ({ closeModal }) => {
               type="text"
               placeholder="Código de Barras"
               name="barcode"
-              value={barcode}
+              value={barcode || ''}
               onChange={onChange}
               onKeyPress={handleBarcodeKeyPress}
               ref={barcodeInputRef}
@@ -403,7 +421,7 @@ const AddProduct = ({ closeModal }) => {
             type="text"
             placeholder="Nombre del Producto"
             name="name"
-            value={name}
+            value={name || ''}
             onChange={onChange}
           />
         </div>
@@ -413,7 +431,7 @@ const AddProduct = ({ closeModal }) => {
             type="number"
             placeholder="Stock"
             name="stock"
-            value={stock}
+            value={stock || ''}
             onChange={onChange}
           />
         </div>
@@ -424,7 +442,7 @@ const AddProduct = ({ closeModal }) => {
               type="text"
               placeholder="Enlace de Imagen del Producto"
               name="image"
-              value={image}
+              value={image || ''}
               onChange={onChange}
               style={{ paddingRight: '120px' }}
             />
@@ -450,7 +468,7 @@ const AddProduct = ({ closeModal }) => {
             type="number"
             placeholder="Precio"
             name="price"
-            value={price}
+            value={price || ''}
             onChange={onChange}
           />
         </div>
@@ -459,6 +477,7 @@ const AddProduct = ({ closeModal }) => {
           <select
             className="select-category"
             name="category"
+            value={category || ''}
             onChange={onChange}
           >
             <option value="">Seleccionar Categoría</option>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { register } from "../features/auth/authSlice";
 import { toast } from "react-toastify";
 
@@ -13,6 +13,7 @@ const AddUser = ({ closeModal }) => {
 
   const { name, email, password, isAdmin } = formData;
   const dispatch = useDispatch();
+  const { user: currentUser } = useSelector((state) => state.auth);
 
   const onChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -20,6 +21,19 @@ const AddUser = ({ closeModal }) => {
       ...prevState,
       [name]: type === "checkbox" ? checked : value
     }));
+  };
+
+  const generateRandomPassword = () => {
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
+    let newPassword = "";
+    for (let i = 0; i < 12; i++) {
+      newPassword += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    setFormData(prevState => ({
+      ...prevState,
+      password: newPassword
+    }));
+    return newPassword;
   };
 
   const handleSubmit = (e) => {
@@ -92,6 +106,26 @@ const AddUser = ({ closeModal }) => {
             onChange={onChange}
           />
         </div>
+
+        {/* Button to generate random password for admins */}
+        {currentUser?.isAdmin && (
+          <div className="form-input">
+            <button 
+              type="button"
+              onClick={generateRandomPassword}
+              style={{
+                padding: '8px 12px',
+                backgroundColor: '#28a745',
+                color: 'white',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer'
+              }}
+            >
+              Generar Contraseña Aleatoria
+            </button>
+          </div>
+        )}
 
         <div className="form-input">
           <label>

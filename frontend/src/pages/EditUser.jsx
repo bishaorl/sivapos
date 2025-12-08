@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "../features/auth/authSlice";
 import { toast } from "react-toastify";
 
@@ -12,16 +12,19 @@ const EditUser = ({ user, closeModal }) => {
   });
   
   const [showPassword, setShowPassword] = useState(false);
+  const [tempPassword, setTempPassword] = useState(""); // For storing temporary password
+  const [showTempPassword, setShowTempPassword] = useState(false);
 
   const { name, email, password, isAdmin } = formData;
   const dispatch = useDispatch();
+  const { user: currentUser } = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (user) {
       setFormData({
         name: user.name || "",
         email: user.email || "",
-        password: "",
+        password: "", // Intencionalmente vacío por razones de seguridad
         isAdmin: user.isAdmin || false
       });
     }
@@ -37,6 +40,24 @@ const EditUser = ({ user, closeModal }) => {
   
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+  };
+  
+  const toggleTempPasswordVisibility = () => {
+    setShowTempPassword(!showTempPassword);
+  };
+
+  const generateRandomPassword = () => {
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
+    let newPassword = "";
+    for (let i = 0; i < 12; i++) {
+      newPassword += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    setFormData(prevState => ({
+      ...prevState,
+      password: newPassword
+    }));
+    setTempPassword(newPassword);
+    return newPassword;
   };
 
   const handleSubmit = (e) => {
@@ -117,7 +138,7 @@ const EditUser = ({ user, closeModal }) => {
         <div className="form-input password-field">
           <input
             type={showPassword ? "text" : "password"}
-            placeholder="Nueva Contraseña (dejar en blanco para no cambiar)"
+            placeholder="Nueva Contraseña (dejar en blanco para mantener la actual)"
             name="password"
             value={password}
             onChange={onChange}
@@ -138,6 +159,65 @@ const EditUser = ({ user, closeModal }) => {
           </span>
         </div>
 
+        {/* Show reveal password button for admins if there's a temp password */}
+        {currentUser?.isAdmin && tempPassword && (
+          <div className="form-input">
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <span>Contraseña temporal:</span>
+              <input
+                type={showTempPassword ? "text" : "password"}
+                value={tempPassword}
+                readOnly
+                style={{ flex: 1 }}
+              />
+              <span 
+                onClick={toggleTempPasswordVisibility}
+                style={{
+                  cursor: 'pointer',
+                  userSelect: 'none',
+                  padding: '0 5px'
+                }}
+              >
+                {showTempPassword ? '👁️' : '👁️‍🗨️'}
+              </span>
+              <button 
+                type="button"
+                onClick={() => navigator.clipboard.writeText(tempPassword)}
+                style={{
+                  padding: '5px 10px',
+                  backgroundColor: '#007bff',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '4px',
+                  cursor: 'pointer'
+                }}
+              >
+                Copiar
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Button to generate random password for admins */}
+        {currentUser?.isAdmin && (
+          <div className="form-input">
+            <button 
+              type="button"
+              onClick={generateRandomPassword}
+              style={{
+                padding: '8px 12px',
+                backgroundColor: '#28a745',
+                color: 'white',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer'
+              }}
+            >
+              Generar Contraseña Aleatoria
+            </button>
+          </div>
+        )}
+
         <div className="form-input">
           <label>
             <input
@@ -152,6 +232,19 @@ const EditUser = ({ user, closeModal }) => {
 
         <div className="form-input">
           <button className="product-btn">Actualizar Usuario</button>
+        </div>
+        
+        <div style={{ 
+          marginTop: '10px', 
+          padding: '10px', 
+          backgroundColor: '#f0f8ff', 
+          border: '1px solid #add8e6', 
+          borderRadius: '4px',
+          fontSize: '12px',
+          color: '#333'
+        }}>
+          <strong>Nota:</strong> Por razones de seguridad, las contraseñas no se muestran. 
+          Ingrese una nueva contraseña solo si desea cambiarla.
         </div>
       </form>
     </div>
