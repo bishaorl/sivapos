@@ -13,7 +13,7 @@ const Home = () => {
         />
         </a>
         <div className="logo-3d">SiVa</div>
-        <div className="circles"></div>
+        {/* <div className="circles"></div> */}
         <h1>
         <span>Gestion Punto de Venta</span>
         </h1>

@@ -557,7 +557,8 @@ section header {
 }
 
 section header .logo {
-  font-size: 30px;
+  /* font-size: 30px; */
+  display: -ms-flexbox;
   color: black;
   text-decoration: none;
   font-weight: bold;  
@@ -587,7 +588,7 @@ section header .logo {
   transition: all 0.3s ease;
  
   /* margin: 0 15px; */
-  margin-left: -7cm;
+  margin-left: -6cm;
   margin-right: 12cm;
   font-family: 'Arial Black', 'Arial Bold', sans-serif;
   letter-spacing: 1px;
@@ -2714,7 +2715,7 @@ margin: 5% auto;
 .btn-barcode-small-3d:hover {
   background: linear-gradient(145deg, #55efc4, #00b894);
   transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(0, 184, 148, 0.4);
+  box-shadow: 0 4px 4px rgba(0, 184, 148, 0.4);
 }
 
 .btn-barcode-small-3d:active {
