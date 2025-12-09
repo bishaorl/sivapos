@@ -45,4 +45,4 @@ app.use(errorHandler)
 
 // SERVER SETUP
 const PORT = process.env.PORT || 8000
-app.listen(PORT, () => console.log(`server on port ${PORT}`))
+app.listen(PORT, '0.0.0.0', () => console.log(`server on port ${PORT}`))

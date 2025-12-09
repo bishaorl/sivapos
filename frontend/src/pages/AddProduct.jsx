@@ -154,7 +154,15 @@ const AddProduct = ({ closeModal }) => {
     if (e.key === 'Enter') {
       e.preventDefault();
       if (barcode && barcode.trim() !== '') {
-        dispatch(searchProductByBarcode(barcode.trim()));
+        dispatch(searchProductByBarcode(barcode.trim()))
+          .then((result) => {
+            // Si la búsqueda fue exitosa pero no encontró el producto, limpiar el campo
+            if (result.meta.requestStatus === 'rejected' && 
+                result.payload?.message?.includes('no encontrado')) {
+              // El mensaje de error ya se muestra mediante toast en el slice
+              // No necesitamos hacer nada adicional aquí
+            }
+          });
       }
     }
   };

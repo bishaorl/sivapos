@@ -6,3 +6,15 @@ Todo va excelente. podemos agregar un icono moderno en 3d generador de codigos d
 Todo muy bien. Puedes revisar al generar el codigo de barra no muestra la imagen del codigo de barra generado y por ende no hay nada que imprimir. puedes ayudarme a que se muestre la imagen de codigo de barra para poder imprimirla. Gracias quedo atento.
 
 Por que no puedes instalar paquetes directamente o cual es la causa de que no puedes instalar los paquetes necesarios directamente. te doy la autorizacion para que instales los paquetes necesarios de forma automatica o dime que paquetes se necesitan y como instalarlos por que aun no se ve la imagen del codigo de barra generado, puedes revisar por favor el cuadro donde deberia aparecer el codigo aparece todo en negro. Puedes revisar por favor y ayudarme a corregir el error. Gracias
+
+Esto va en mi Package.json para compartir el servidor Con PORT
+"export default": {
+    "server": {
+      "proxy": {
+        "/api": "http://localhost:8000"
+      }
+    }
+  }
+
+"proxy": "http://localhost:8000",
+

@@ -54,7 +54,23 @@ export const searchProductByBarcode = createAsyncThunk('product/searchProductByB
     try {
        return await productService.searchProductByBarcode(barcode)
     } catch (error) {
-         return thunkAPI.rejectWithValue(error.response.data)
+        // Verificar si es un error de red o un error de producto no encontrado
+        if (error.code === 'ERR_NETWORK' || error.message === 'Network Error') {
+            // Error de conexión
+            return thunkAPI.rejectWithValue({ 
+                message: 'No se puede conectar con el servidor. Por favor, verifica tu conexión.' 
+            })
+        } else if (error.response?.status === 404) {
+            // Producto no encontrado
+            return thunkAPI.rejectWithValue({ 
+                message: 'Producto no encontrado con ese código de barras.' 
+            })
+        } else {
+            // Otro tipo de error
+            return thunkAPI.rejectWithValue(error.response?.data || { 
+                message: 'Error al buscar el producto.' 
+            })
+        }
     }
 })
 

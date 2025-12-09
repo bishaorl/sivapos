@@ -5,7 +5,8 @@ const { verifyToken } = require('../middleware/authMiddleware')
 
 router.get('/all-products', verifyToken, getAllProducts)
 router.get('/product-filter/:category', verifyToken, categoryProductFilter)
-router.get('/search-by-barcode/:barcode', verifyToken, searchByBarcode)
+// Removemos la verificación de token para la búsqueda por código de barras
+router.get('/search-by-barcode/:barcode', searchByBarcode)
 router.post('/add-product', verifyToken, addProduct)
 router.put('/update-product/:id', verifyToken, updateProduct)
 router.delete('/delete/:product', verifyToken, removeProduct)

@@ -5,7 +5,7 @@ const httpRequest = axios.create({
         "Accept": "application/json",
         "Content-Type": "application/json",
     },
-    baseURL: "http://localhost:8000/api",
+    baseURL: "/api", // Usar ruta relativa para que funcione con el proxy
     withCredentials: true,
 })
 

@@ -4,7 +4,8 @@ const { addCategory, getCategories, updateCategory, removeCategory } = require('
 const { verifyToken } = require('../middleware/authMiddleware')
 
 router.post('/add-category', verifyToken, addCategory)
-router.get('/get-categories', verifyToken, getCategories)
+// Removemos la verificación de token para obtener categorías
+router.get('/get-categories', getCategories)
 router.put('/update-category/:categoryId', verifyToken, updateCategory)
 router.delete('/remove-category/:categoryId', verifyToken, removeCategory)
 

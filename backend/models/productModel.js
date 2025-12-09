@@ -34,7 +34,7 @@ const Product = sequelize.define('Product', {
     },
     userId: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true, // Hacer opcional para búsquedas públicas
         references: {
             model: 'Users',
             key: 'id'
@@ -42,12 +42,12 @@ const Product = sequelize.define('Product', {
     }
 }, {
     timestamps: true,
-    // Forzar la actualización del esquema si es necesario
-    sync: { alter: true }
+    // Usar force: false para evitar recrear la tabla y perder datos
+    sync: { force: false }
 })
 
-// Sincronizar el modelo con la base de datos
-Product.sync({ alter: true })
+// Sincronizar el modelo con la base de datos sin forzar cambios
+Product.sync()
     .then(() => {
         console.log('Tabla Products sincronizada correctamente');
     })
