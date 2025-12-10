@@ -36,7 +36,16 @@ const Orders = () => {
 
   return (
     <div className="table-container">
-      <h2>Tabla de Órdenes</h2>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+        <h2>Tabla de Órdenes</h2>
+        <button 
+          className="close-button-3d" 
+          onClick={() => window.history.back()}
+          title="Cerrar"
+        >
+          ✕
+        </button>
+      </div>
       <table className="data-table">
         <thead>
           <tr>

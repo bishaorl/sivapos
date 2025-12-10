@@ -47,7 +47,31 @@ const Statistics = () => {
       </div>
     )}
 
-      <div className="statistic-layout">
+      <div className="statistic-layout">        
+        <Link to="/dashboard/products-table" className="statistics-link">
+          <div className="statistics">
+            <span className="statistic-title">Productos</span>
+            <div className="statistic-count">
+              <div className="image">
+                <img src={require("../images/products.png")} alt="..." />
+              </div>
+              <span>{products.length}</span>
+            </div>
+          </div>
+        </Link>
+
+        <Link to="/dashboard/categories-table" className="statistics-link">
+          <div className="statistics">
+            <span className="statistic-title">Categorias</span>
+            <div className="statistic-count">
+              <div className="image">
+                <img src={require("../images/category.png")} alt="..." />
+              </div>
+              <span>{categories.length}</span>
+            </div>
+          </div>
+        </Link>
+
         <Link to="/dashboard/orders-table" className="statistics-link">
           <div className="statistics">
             <span className="statistic-title">Pedidos</span>
@@ -74,31 +98,7 @@ const Statistics = () => {
           </Link>
         )}
 
-        <Link to="/dashboard/products-table" className="statistics-link">
-          <div className="statistics">
-            <span className="statistic-title">Productos</span>
-            <div className="statistic-count">
-              <div className="image">
-                <img src={require("../images/products.png")} alt="..." />
-              </div>
-              <span>{products.length}</span>
-            </div>
-          </div>
-        </Link>
-
-        <Link to="/dashboard/categories-table" className="statistics-link">
-          <div className="statistics">
-            <span className="statistic-title">Categorias</span>
-            <div className="statistic-count">
-              <div className="image">
-                <img src={require("../images/category.png")} alt="..." />
-              </div>
-              <span>{categories.length}</span>
-            </div>
-          </div>
-        </Link>
       </div>
-      
     </>
   );
 };

@@ -187,6 +187,13 @@ const ProductsTable = () => {
       <div className="table-container">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
           <h2>Tabla de Productos</h2>
+          {/* <button 
+            className="close-button-3d" 
+            onClick={() => window.history.back()}
+            title="Cerrar"
+          >
+            ✕
+          </button> */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <div className="header__search" style={{ margin: 0, padding: '0.40rem 0.75rem' }}>
               <form className="search-form" onSubmit={(e) => e.preventDefault()}>
@@ -213,6 +220,13 @@ const ProductsTable = () => {
                 + Agregar Nuevo Producto
               </button>
             )}
+            <button 
+              className="close-button-3d" 
+              onClick={() => window.history.back()}
+              title="Cerrar"
+            >
+              ✕
+            </button>
           </div>
         </div>
         <table className="data-table">

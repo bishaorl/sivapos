@@ -40,7 +40,7 @@ const UsersTable = () => {
   return (
     <div className="table-container">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-        <h2>Tabla de Usuarios</h2>
+        <h2>Tabla de Usuarios</h2>        
         {user?.isAdmin && (
           <button 
             className="btn-edit-3d" 
@@ -50,6 +50,13 @@ const UsersTable = () => {
             <FaPlus /> Agregar Nuevo Usuario
           </button>
         )}
+        <button 
+          className="close-button-3d" 
+          onClick={() => window.history.back()}
+          title="Cerrar"
+        >
+          ✕
+        </button>
       </div>
       <table className="data-table">
         <thead>
