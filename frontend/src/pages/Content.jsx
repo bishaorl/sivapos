@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import Categories from "./Categories";
@@ -11,6 +11,7 @@ const Content = () => {
   const dispatch = useDispatch();
   const [barcode, setBarcode] = useState("");
   const [isSearching, setIsSearching] = useState(false);
+  const barcodeInputRef = useRef(null);
 
   const handleBarcodeSearch = async (e) => {
     e.preventDefault();
@@ -35,6 +36,13 @@ const Content = () => {
           dispatch(addToCart(product));
           toast.success(`Producto "${product.name}" agregado al carrito`);
           setBarcode(""); // Limpiar el campo de búsqueda
+          
+          // Devolver el foco al campo de búsqueda después de un breve retraso
+          setTimeout(() => {
+            if (barcodeInputRef.current) {
+              barcodeInputRef.current.focus();
+            }
+          }, 100);
         } else {
           toast.error("El producto encontrado no tiene la información completa requerida");
         }
@@ -42,10 +50,24 @@ const Content = () => {
         // Manejar errores de búsqueda
         const errorMessage = resultAction.payload?.message || "Producto no encontrado";
         toast.error(errorMessage);
+        
+        // Devolver el foco al campo de búsqueda incluso si hay error
+        setTimeout(() => {
+          if (barcodeInputRef.current) {
+            barcodeInputRef.current.focus();
+          }
+        }, 100);
       }
     } catch (error) {
       toast.error("Error al buscar el producto");
       console.error("Error al buscar producto por código de barras:", error);
+      
+      // Devolver el foco al campo de búsqueda incluso si hay error
+      setTimeout(() => {
+        if (barcodeInputRef.current) {
+          barcodeInputRef.current.focus();
+        }
+      }, 100);
     } finally {
       setIsSearching(false);
     }
@@ -84,6 +106,7 @@ const Content = () => {
           }}
         >
           <input
+            ref={barcodeInputRef}
             type="text"
             value={barcode}
             onChange={(e) => setBarcode(e.target.value)}
@@ -97,6 +120,7 @@ const Content = () => {
               fontFamily: 'var(--font-family2)'
             }}
             disabled={isSearching}
+            autoFocus
           />
           <button 
             type="submit"
