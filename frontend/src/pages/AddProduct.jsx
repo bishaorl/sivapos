@@ -328,6 +328,23 @@ const AddProduct = ({ closeModal }) => {
                 box-shadow: none;
               }
             }
+            @media (max-width: 768px) {
+              .barcode-container {
+                padding: 20px;
+                margin: 10px;
+              }
+              .product-name {
+                font-size: 18px;
+              }
+            }
+            @media (max-width: 480px) {
+              .barcode-container {
+                padding: 15px;
+              }
+              .product-name {
+                font-size: 16px;
+              }
+            }
           </style>
         </head>
         <body>
@@ -357,7 +374,9 @@ const AddProduct = ({ closeModal }) => {
           display: 'flex', 
           justifyContent: 'space-between', 
           alignItems: 'center',
-          marginBottom: '20px'
+          marginBottom: '20px',
+          flexWrap: 'wrap',
+          gap: '10px'
         }}>
           <h1 className="new-product">
             {isEditing ? "Editar Producto" : "Nuevo Producto"}
@@ -380,7 +399,7 @@ const AddProduct = ({ closeModal }) => {
         </div>
 
         <div className="form-input barcode-input-container">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
             <input
               type="text"
               placeholder="Código de Barras"
@@ -389,7 +408,7 @@ const AddProduct = ({ closeModal }) => {
               onChange={onChange}
               onKeyPress={handleBarcodeKeyPress}
               ref={barcodeInputRef}
-              style={{ flex: 1 }}
+              style={{ flex: 1, minWidth: '150px' }}
             />
             <button 
               type="button" 

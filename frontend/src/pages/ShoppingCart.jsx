@@ -28,13 +28,7 @@ const ShoppingCart = () => {
       <div className="cart-header">
         <div className="cart-title">
           <span>Articulos en el Carrito</span>
-          {/* <span>Tabla del carrito</span> */}
         </div>
-
-        {/* <div className="cart-number">
-          <h3># {cartItems && cartItems.length}</h3>
-          <h3>T1</h3>
-        </div> */}
       </div>
 
       <div className="cart-empty">

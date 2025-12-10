@@ -82,7 +82,6 @@ const Cart = () => {
   return (
     <div className="cart-page">
       <div className="cart-container">
-
         <header className="cart-header">
           <a href="/dashboard" className="logo">
           <img src={require("../images/logo.png")}
@@ -101,79 +100,81 @@ const Cart = () => {
 
       <div id="shop-container">
         <section id="cart">
-          <table>
-            <thead>
-              <tr>
-                <td></td>
-                <td>Imagen</td>
-                <td>Producto</td>
-                <td>Precio</td>
-                <td>Cantidad</td>
-                <td>Subtotal</td>
-              </tr>
-            </thead>
-            <tbody>
-              {cartItems ? (
-                cartItems.map((product) => (
-                  <tr key={product.id}>
-                    <td>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          dispatch(removeCartItem(product.id));
-                        }}
-                      >
-                        <FaTimes />
-                      </button>
-                    </td>
-                    <td>
-                      {product.image ? (
-                        <img
-                          className="product-image"
-                          src={product.image}
-                          alt="..."
-                        />
-                      ) : (
-                        <img
-                          className="default-image"
-                          src={require("../images/product.png")}
-                          alt="..."
-                        />
-                      )}
-                    </td>
-                    <td>{product.name}</td>
-                    <td>$ {product.price.toFixed(2)}</td>
-                    <td>
-                      <div className="count">
+          <div className="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <td></td>
+                  <td>Imagen</td>
+                  <td>Producto</td>
+                  <td>Precio</td>
+                  <td>Cantidad</td>
+                  <td>Subtotal</td>
+                </tr>
+              </thead>
+              <tbody>
+                {cartItems ? (
+                  cartItems.map((product) => (
+                    <tr key={product.id}>
+                      <td>
                         <button
-                          className="increment-btn"
                           type="button"
                           onClick={() => {
-                            dispatch(increase(product.id));
+                            dispatch(removeCartItem(product.id));
                           }}
                         >
-                          +
+                          <FaTimes />
                         </button>
-                        <span className="amount">{product.quantity}</span>
-                        <button
-                          className="decrement-btn"
-                          type="button"
-                          onClick={() => {
-                            dispatch(decrease(product.id));
-                          }}
-                        >
-                          -
-                        </button>
-                      </div>
-                    </td>
-                    <td>$ {(product.price * product.quantity).toFixed(2)}</td>
-                  </tr>
-                ))
-              ) : (
-                <div>Products Loading...</div>
-              )}
-            </tbody>
-          </table>
+                      </td>
+                      <td>
+                        {product.image ? (
+                          <img
+                            className="product-image"
+                            src={product.image}
+                            alt="..."
+                          />
+                        ) : (
+                          <img
+                            className="default-image"
+                            src={require("../images/product.png")}
+                            alt="..."
+                          />
+                        )}
+                      </td>
+                      <td>{product.name}</td>
+                      <td>$ {product.price.toFixed(2)}</td>
+                      <td>
+                        <div className="count">
+                          <button
+                            className="increment-btn"
+                            type="button"
+                            onClick={() => {
+                              dispatch(increase(product.id));
+                            }}
+                          >
+                            +
+                          </button>
+                          <span className="amount">{product.quantity}</span>
+                          <button
+                            className="decrement-btn"
+                            type="button"
+                            onClick={() => {
+                              dispatch(decrease(product.id));
+                            }}
+                          >
+                            -
+                          </button>
+                        </div>
+                      </td>
+                      <td>$ {(product.price * product.quantity).toFixed(2)}</td>
+                    </tr>
+                  ))
+                ) : (
+                  <div>Products Loading...</div>
+                )}
+              </tbody>
+            </table>
+          </div>
         </section>
 
         <div className="cart-summary styled">

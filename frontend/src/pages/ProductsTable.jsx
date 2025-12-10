@@ -185,16 +185,9 @@ const ProductsTable = () => {
   return (
     <>
       <div className="table-container">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '10px' }}>
           <h2>Tabla de Productos</h2>
-          {/* <button 
-            className="close-button-3d" 
-            onClick={() => window.history.back()}
-            title="Cerrar"
-          >
-            ✕
-          </button> */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
             <div className="header__search" style={{ margin: 0, padding: '0.40rem 0.75rem' }}>
               <form className="search-form" onSubmit={(e) => e.preventDefault()}>
                 <input 
@@ -229,82 +222,70 @@ const ProductsTable = () => {
             </button>
           </div>
         </div>
-        <table className="data-table">
-          <thead>
-            <tr>
-              <th style={{ width: '5%' }}>ID</th>
-              <th style={{ width: '15%' }}>Nombre</th>
-              <th style={{ width: '10%' }}>Código de Barras</th>
-              <th style={{ width: '10%' }}>Stock</th>
-              <th style={{ width: '10%' }}>Precio</th>
-              <th style={{ width: '15%' }}>Categoría</th>
-              <th style={{ width: '15%' }}>Imagen</th>
-              <th style={{ width: '20%' }}>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredProducts.map((product) => (
-              <tr key={product.id}>
-                <td style={{ width: '5%' }}>{product.id}</td>
-                <td style={{ width: '15%' }}>{product.name}</td>
-                <td style={{ width: '10%' }}>
-                  {product.barcode || 'N/A'}
-                  {product.barcode && (
-                    <div style={{ marginTop: '5px' }}>
-                      {/* Botón de prueba temporal
-                      <button 
-                        className="btn-barcode-small-3d"
-                        onClick={() => testButton(product)}
-                        title="Botón de prueba"
-                        style={{ 
-                          marginLeft: '5px', 
-                          padding: '2px 6px', 
-                          fontSize: '12px',
-                          marginRight: '5px'
-                        }}
-                      >
-                        Test
-                      </button> */}
-                      <button 
-                        className="btn-barcode-small-3d"
-                        onClick={() => showPrintLabel(product)}
-                        title="Ver e imprimir código de barras"
-                        style={{ 
-                          marginLeft: '5px', 
-                          padding: '2px 6px', 
-                          fontSize: '25px', 
-                          marginRight: '5px'
-                        }}
-                      >
-                        🖨️
-                      </button>
-                    </div>
-                  )}
-                </td>
-                <td style={{ width: '10%' }}>{product.stock}</td>
-                <td style={{ width: '10%' }}>${product.price}</td>
-                <td style={{ width: '15%' }}>{product.category}</td>
-                <td style={{ width: '15%' }}>
-                  <img src={product.image} alt={product.name} style={{ width: "50px", height: "50px" }} />
-                </td>
-                {user?.isAdmin && (
-                  <td className="actions-cell" style={{ width: '20%' }}>
-                    <button className="btn-edit-3d" onClick={() => handleEdit(product)} title="Editar">
-                      <FaEdit />
-                    </button>
-                    <button
-                      className="btn-delete-3d"
-                      onClick={() => handleDelete(product.id)}
-                      title="Eliminar"
-                    >
-                      <FaTrash />
-                    </button>
-                  </td>
-                )}
+        <div className="table-responsive">
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th style={{ width: '5%' }}>ID</th>
+                <th style={{ width: '15%' }}>Nombre</th>
+                <th style={{ width: '10%' }}>Código de Barras</th>
+                <th style={{ width: '10%' }}>Stock</th>
+                <th style={{ width: '10%' }}>Precio</th>
+                <th style={{ width: '15%' }}>Categoría</th>
+                <th style={{ width: '15%' }}>Imagen</th>
+                <th style={{ width: '20%' }}>Acciones</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filteredProducts.map((product) => (
+                <tr key={product.id}>
+                  <td style={{ width: '5%' }}>{product.id}</td>
+                  <td style={{ width: '15%' }}>{product.name}</td>
+                  <td style={{ width: '10%' }}>
+                    {product.barcode || 'N/A'}
+                    {product.barcode && (
+                      <div style={{ marginTop: '5px' }}>
+                        <button 
+                          className="btn-barcode-small-3d"
+                          onClick={() => showPrintLabel(product)}
+                          title="Ver e imprimir código de barras"
+                          style={{ 
+                            marginLeft: '5px', 
+                            padding: '2px 6px', 
+                            fontSize: '25px', 
+                            marginRight: '5px'
+                          }}
+                        >
+                          🖨️
+                        </button>
+                      </div>
+                    )}
+                  </td>
+                  <td style={{ width: '10%' }}>{product.stock}</td>
+                  <td style={{ width: '10%' }}>${product.price}</td>
+                  <td style={{ width: '15%' }}>{product.category}</td>
+                  <td style={{ width: '15%' }}>
+                    <img src={product.image} alt={product.name} style={{ width: "50px", height: "50px" }} />
+                  </td>
+                  {user?.isAdmin && (
+                    <td className="actions-cell" style={{ width: '20%' }}>
+                      <button className="btn-edit-3d" onClick={() => handleEdit(product)} title="Editar">
+                        <FaEdit />
+                      </button>
+                      <button
+                        className="btn-delete-3d"
+                        onClick={() => handleDelete(product.id)}
+                        title="Eliminar"
+                      >
+                        <FaTrash />
+                      </button>
+                    </td>
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
       
       {/* Modal de impresión */}
@@ -359,19 +340,20 @@ const ProductsTable = () => {
               display: 'flex', 
               justifyContent: 'space-between', 
               marginTop: '20px',
-              gap: '10px'
+              gap: '10px',
+              flexWrap: 'wrap'
             }}>
               <button 
                 className="btn-print-3d"
                 onClick={printLabel}
-                style={{ flex: 1, padding: '12px' }}
+                style={{ flex: 1, padding: '12px', minWidth: '120px' }}
               >
                 Imprimir Etiqueta
               </button>
               <button 
                 className="btn-edit-3d"
                 onClick={() => setShowPrintModal(false)}
-                style={{ flex: 1, padding: '12px' }}
+                style={{ flex: 1, padding: '12px', minWidth: '120px' }}
               >
                 Cerrar
               </button>
@@ -384,14 +366,11 @@ const ProductsTable = () => {
       {showEditModal && (
         <div className="modal-overlay" style={{ 
           position: "fixed",
-          // top: 20,
-          // bottom: 20,
           left: 0,
           width: '100%',
           height: '110%',
           backgroundColor: 'rgba(0,0,0,0.5)',
           display: 'flex',
-          // display: 'inline-block',
           justifyContent: 'center',
           alignItems: 'center',
           zIndex: 1000,
@@ -416,24 +395,6 @@ const ProductsTable = () => {
               justifyContent: 'space-between',
               alignItems: 'center'
             }}>              
-              {/* <h2 style={{ margin: '0 15px', color: '#333', fontSize: '1.5rem' }}>
-                {isEditing ? "Editar Producto" : "Agregar Nuevo Producto"}
-              </h2> */}
-              {/* <button 
-                type="button" 
-                className="btn-edit-3d"
-                onClick={closeForm}
-                style={{
-                  padding: '10px 20px',
-                  margin: '0 15px',
-                  fontSize: '16px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px'
-                }}
-              >
-                <FaTimes /> Cerrar
-              </button> */}
             </div>
             <AddProduct closeModal={closeForm} />
           </div>
