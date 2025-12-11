@@ -3799,6 +3799,93 @@ margin: 5% auto;
   margin-right: 5px;
 }
 
+/* Estilos responsivos para el contenedor de configuración */
+/* Para tablets */
+@media (max-width: 992px) and (min-width: 768px) {
+  .setting-info-container {
+    padding: 0.3rem;
+    margin-top: -15px;
+    margin-bottom: 6px;
+    min-height: auto;
+    height: auto;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .setting-info-content {
+    gap: 6px;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .setting-logo img {
+    max-width: 45px;
+    max-height: 45px;
+    padding: 3px;
+  }
+  
+  .setting-details {
+    flex: 1;
+    min-width: 200px;
+  }
+  
+  .setting-name {
+    font-size: var(--normal-font-size);
+    margin-bottom: 4px;
+    margin-top: 0;
+  }
+  
+  .setting-item {
+    margin-bottom: 3px;
+    font-size: var(--small-font-size);
+  }
+}
+
+/* Para dispositivos móviles */
+@media (max-width: 767px) {
+  .setting-info-container {
+    padding: 0.25rem;
+    margin-top: -12px;
+    margin-bottom: 5px;
+    min-height: auto;
+    height: auto;
+    width: 100%;
+    max-width: auto; 
+  }
+  
+  .setting-info-content {
+    gap: 4px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex-wrap: wrap;
+  }
+  
+  .setting-logo img {
+    max-width: 40px;
+    max-height: 40px;
+    padding: 2px;
+  }
+  
+  .setting-details {
+    flex: 1;
+    min-width: 100%;
+  }
+  
+  .setting-name {
+    font-size: var(--small-font-size);
+    margin-bottom: 3px;
+    margin-top: 0;
+  }
+  
+  .setting-item {
+    margin-bottom: 2px;
+    font-size: var(--smaller-font-size);
+  }
+}
+
 @media (max-width: 768px) {
   .setting-info-content {    
     flex-direction: column;
