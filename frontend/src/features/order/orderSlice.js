@@ -24,11 +24,11 @@ export const getOrders = createAsyncThunk('order/getOrders', async (_, thunkAPI)
     }
 })
 
-export const removeOrder = createAsyncThunk('order/removeOrder', async (order, thunkAPI) => {
+export const removeOrder = createAsyncThunk('order/removeOrder', async (orderId, thunkAPI) => {
     try {
-        return await orderService.removeOrder(order, thunkAPI)
+        return await orderService.removeOrder({ id: orderId }, thunkAPI)
     } catch (error) {
-         return thunkAPI.rejectWithValue(error.response.data)
+        return thunkAPI.rejectWithValue(error.response.data)
     }
 })
 
@@ -64,7 +64,9 @@ export const orderSlice = createSlice({
         })
         .addCase(removeOrder.fulfilled, (state, action) => {
             state.loading = false
-            state.orders = state.orders.filter(order => order.id !== action.meta.arg.order)
+            // Crear una nueva referencia del array de órdenes excluyendo la orden eliminada
+            const updatedOrders = state.orders.filter(order => order.id !== action.payload.id)
+            state.orders = updatedOrders
             toast.success('order successfully deleted')
         })
         .addCase(removeOrder.rejected, (state, action) => {

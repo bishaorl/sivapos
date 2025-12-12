@@ -144,9 +144,9 @@ export const authSlice = createSlice({
         })
         .addCase(removeUser.fulfilled, (state, action) => {
             state.loading = false
-            // update users state
-            let removeUser = state.users.filter(item => item._id !== action.payload._id)
-            state.users = removeUser
+            // Crear una nueva referencia del array de usuarios excluyendo el usuario eliminado
+            const updatedUsers = state.users.filter(item => item._id !== action.payload._id)
+            state.users = updatedUsers
             toast.success('Usuario eliminado correctamente')
         })
         .addCase(removeUser.rejected, (state, action) => {

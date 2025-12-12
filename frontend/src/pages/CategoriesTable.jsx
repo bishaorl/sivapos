@@ -10,14 +10,18 @@ const CategoriesTable = () => {
   const { categories, loading } = useSelector((state) => state.category);
   const { user } = useSelector((state) => state.auth);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [refreshFlag, setRefreshFlag] = useState(false);
 
   useEffect(() => {
     dispatch(getCategories());
-  }, [dispatch]);
+  }, [dispatch, refreshFlag]);
 
   const handleDelete = (categoryId) => {
     if (window.confirm("¿Estás seguro de que quieres eliminar esta categoría?")) {
-      dispatch(removeCategory(categoryId));
+      dispatch(removeCategory(categoryId)).then(() => {
+        // Forzar una actualización del componente
+        setRefreshFlag(prev => !prev);
+      });
     }
   };
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { allUsers, updateUser, removeUser } from "../features/auth/authSlice";
+import { allUsers, removeUser } from "../features/auth/authSlice";
 import { FaEdit, FaTrash, FaPlus } from "react-icons/fa";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import AddUser from "./AddUser";
@@ -12,14 +12,18 @@ const UsersTable = () => {
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [refreshFlag, setRefreshFlag] = useState(false);
 
   useEffect(() => {
     dispatch(allUsers());
-  }, [dispatch]);
+  }, [dispatch, refreshFlag]);
 
   const handleDelete = (userId) => {
     if (window.confirm("¿Estás seguro de que quieres eliminar este usuario?")) {
-      dispatch(removeUser(userId));
+      dispatch(removeUser(userId)).then(() => {
+        // Forzar una actualización del componente
+        setRefreshFlag(prev => !prev);
+      });
     }
   };
 

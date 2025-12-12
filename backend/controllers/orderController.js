@@ -46,8 +46,11 @@ const addOrder = async (req, res) => {
 // @route   /api/order/get-orders
 // @desc    Get Orders
 const getOrders = async (req, res) => {
-    const orders = await Order.findAll()
-    res.status(201).json(orders)
+    const orders = await Order.findAll({
+        order: [['createdAt', 'DESC']],
+        limit: 100
+    });
+    res.status(200).json(orders);
 }
 
 // @route   /api/order/delete
@@ -58,19 +61,19 @@ const removeOrder = async (req, res) => {
     const order = await Order.findByPk(orderId)
 
     if (!order) {
-        res.status(400)
-        throw new Error('Please fill in the blanks')
+        res.status(404)
+        throw new Error('Order not found')
     }
 
     if (order.userId !== req.user.id) {
         if (!req.user.isAdmin) {
             res.status(401)
-            throw new Error('A user can only delete the product they added')
+            throw new Error('A user can only delete the order they created')
         }
     }
 
     await order.destroy()
-    res.status(201).json(order)
+    res.status(200).json({ id: orderId })
 }
 
 module.exports = {

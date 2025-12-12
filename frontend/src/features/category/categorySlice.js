@@ -112,9 +112,9 @@ export const categorySlice = createSlice({
         })
         .addCase(removeCategory.fulfilled, (state, action) => {
             state.loading = false
-            // update categories state
-            let removeCategory = state.categories.filter(item => (item._id !== action.payload._id && item.id !== action.payload.id))
-            state.categories = removeCategory
+            // Crear una nueva referencia del array de categorías excluyendo la categoría eliminada
+            const updatedCategories = state.categories.filter(item => (item._id !== action.payload._id && item.id !== action.payload.id))
+            state.categories = updatedCategories
             toast.success('category successfully deleted')
         })
         .addCase(removeCategory.rejected, (state, action) => {

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getOrders, removeOrder } from "../features/order/orderSlice";
 import { FaEdit, FaTrash } from "react-icons/fa";
@@ -8,14 +8,18 @@ const Orders = () => {
   const { orders, loading } = useSelector((state) => state.order);
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const [refreshFlag, setRefreshFlag] = useState(false);
 
   useEffect(() => {
     dispatch(getOrders());
-  }, [dispatch]);
+  }, [dispatch, refreshFlag]);
 
   const handleDelete = (orderId) => {
     if (window.confirm("¿Estás seguro de que quieres eliminar esta orden?")) {
-      dispatch(removeOrder({ order: orderId }));
+      dispatch(removeOrder(orderId)).then(() => {
+        // Forzar una actualización del componente
+        setRefreshFlag(prev => !prev);
+      });
     }
   };
 
