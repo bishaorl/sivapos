@@ -41,3 +41,4 @@ Search for the keywords to learn more about each error.
 
 Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
 
+Order-Button-to-Top-Down-View-Delivery-Truck-on-Road-Animation.gif

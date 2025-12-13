@@ -54,7 +54,7 @@ const Orders = () => {
         <thead>
           <tr>
             <th style={{ width: '15%' }}>ID</th>
-            <th style={{ width: '15%' }}>Usuario</th>
+            <th style={{ width: '15%' }}>Cliente</th>
             <th style={{ width: '25%' }}>Productos</th>
             <th style={{ width: '10%' }}>Total</th>
             <th style={{ width: '15%' }}>Fecha</th>

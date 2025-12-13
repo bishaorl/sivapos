@@ -27,7 +27,20 @@ const ShoppingCart = () => {
     <div className="cart">
       <div className="cart-header">
         <div className="cart-title">
-          <span>Articulos en el Carrito</span>
+          <span>Articulos en el Carrito de Compras</span>
+          <div className="image">
+          <img 
+            src={require("../images/gif/5.webp")} 
+            alt="Carrito GIF" 
+            style={{ 
+              width: '70px', 
+              height: '50px', 
+              marginLeft: '0px',
+              marginRight: '2px',
+              verticalAlign: 'middle'
+            }} 
+            />
+          </div>
         </div>
       </div>
 
@@ -69,8 +82,8 @@ const ShoppingCart = () => {
 
               <div className="details">
                 <div className="status">
-                  <span className="status-note">Category:</span>
-                  <p className="status-text">{cart.category}</p>
+                  <span className="status-note">Stock:</span>
+                  <p className="status-text">{cart.stock}</p>
                 </div>
 
                 <div className="price">

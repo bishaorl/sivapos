@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { React, useEffect, useState, useRef } from "react";
 import { FaHome, FaTimes } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { useNavigate, Link } from "react-router-dom";
@@ -36,9 +36,29 @@ const Cart = () => {
   const [zipcode, setZipcode] = useState("");
   const [phone, setPhone] = useState("");
   const [payment, setPayment] = useState("Cash");
+  const orderButtonRef = useRef(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    // Validar campos requeridos
+    if (customer === "" || zipcode === "" || phone === "") {
+      toast.warning("Por favor complete los campos requeridos");
+      return; // No continuar si hay campos vacíos
+    }
+
+    // Prevenir múltiples envíos
+    if (isSubmitting) {
+      return;
+    }
+    
+    setIsSubmitting(true);
+    
+    // Activar la animación del botón
+    if (orderButtonRef.current) {
+      orderButtonRef.current.classList.add('animate');
+    }
 
     const newOrder = {
       customer,
@@ -54,14 +74,20 @@ const Cart = () => {
       user: user._id,
     };
 
-    if (customer !== "" || zipcode !== "" || phone !== "") {
+    // Esperar a que termine la animación (10 segundos) antes de procesar el pedido
+    setTimeout(() => {
       dispatch(orderCreate(newOrder));
       dispatch(clearCart());
       deleteLocalStorageCart();
+      
+      // Resetear el estado de envío y la animación
+      setIsSubmitting(false);
+      if (orderButtonRef.current) {
+        orderButtonRef.current.classList.remove('animate');
+      }
+      
       navigate("/dashboard/orders");
-    } else {
-      toast.warning("Por favor complete los campos requeridos");
-    }
+    }, 10000); // 10 segundos para que se complete la animación
   };
 
   if (cartItems.length === 0) {
@@ -234,9 +260,7 @@ const Cart = () => {
                           onChange={(e) => setPayment(e.target.value)}
                         >
                           <option defaultValue="efectivo">Efectivo</option>
-                          <option defaultValue="pago movil">
-                            Pago Movil
-                          </option>
+                          <option defaultValue="pago movil">Pago Movil</option>
                           <option defaultValue="Divisa">Divisa</option>
                         </select>
                       </div>
@@ -276,7 +300,7 @@ const Cart = () => {
                       <td>$ {subTotal.toFixed(2)}</td>
                     </tr>
                     <tr>
-                      <th>IVA: % 8</th>
+                      <th>IVA: 16%</th>
                       <td>$ {tax.toFixed(2)}</td>
                     </tr>
                     <tr className="grand-total">
@@ -288,7 +312,25 @@ const Cart = () => {
                   </tbody>
                 </table>
                 <div className="secondary-button">
-                  <button type="submit">Crear Orden</button>
+                  <button ref={orderButtonRef} className="order" type="submit">
+                    <span className="default">Complete Order</span>
+                    <span className="success">Order Placed
+                      <svg viewBox="0 0 12 10">
+                        <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                      </svg>
+                    </span>
+                    <div className="box"></div>
+                    <div className="truck">
+                      <div className="back"></div>
+                      <div className="front">
+                        <div className="window"></div>
+                      </div>
+                      <div className="light top"></div>
+                      <div className="light bottom"></div>
+                    </div>
+                    {/* <div className="lines"></div>
+                    Crear Orden Animado */}
+                  </button>
                 </div>
               </div>
             </div>
